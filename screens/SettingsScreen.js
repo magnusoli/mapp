@@ -21,7 +21,7 @@ class SettingsScreen extends React.Component {
           onPress={() =>
             this.props.dispatch({
               type: "UPDATE_NAME",
-              payload: { name: this.state.text || "Mr. No name provided", done: false }
+              payload: { name: this.state.text, done: false }
             })
           }
         />

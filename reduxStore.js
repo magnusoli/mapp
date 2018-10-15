@@ -1,34 +1,26 @@
 import { createStore } from "redux";
 
-const initialState = {
-  list: [
-    {
-      name: "borða",
-      done: false,
-      key: 1
-    },
-    {
-      name: "sofa",
-      done: false,
-      key: 2
-    },
-    {
-      name: "myrða jón",
-      done: false,
-      key: 3
-    },
-    {
-      name: "búa til hús",
-      done: false,
-      key: 4
-    }
-  ]
-};
+const initialState = [
+  {
+    name: "magnús",
+    done: false
+  }
+];
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "UPDATE_NAME":
-      return { ...state, list: list.push(action.payload.obj) };
+      return [
+        ...state,
+        { name: action.payload.name, done: action.payload.done }
+      ];
+    case "UPDATE_SWITCH":
+      return state.map(obj => {
+        if (obj.name === action.payload.name) {
+          obj.done = action.payload.done;
+        }
+        return obj;
+      });
     default:
       return state;
   }
