@@ -35,7 +35,6 @@ class HomeScreen extends React.Component {
       </View>
     );
   };
-
   handleSubmit(text) {
     this.props.dispatch({
       type: "UPDATE_LIST",

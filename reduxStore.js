@@ -1,11 +1,6 @@
 import { createStore } from "redux";
 
-const initialState = [
-  {
-    name: "magnús",
-    done: false
-  }
-];
+const initialState = [];
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -14,10 +9,16 @@ const reducer = (state = initialState, action) => {
         ...state,
         { name: action.payload.name, done: action.payload.done }
       ];
+    case "DELETE_LIST":
+      return state.filter(obj => {
+        if (obj.name != action.payload.name) {
+          return obj;
+        }
+      });
 
     case "UPDATE_SWITCH":
       return state.map(obj => {
-        if (obj.name === action.payload.name) {
+        if (obj.name == action.payload.name) {
           obj.done = action.payload.done;
         }
         return obj;

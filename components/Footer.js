@@ -48,7 +48,7 @@ export default class Footer extends React.Component {
           />
           <Button
             disabled={
-              this.props.list.find(obj => {
+              !!this.props.list.find(obj => {
                 if (obj.name === this.state.text) {
                   return true;
                 }
