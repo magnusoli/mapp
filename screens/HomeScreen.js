@@ -5,24 +5,13 @@ import {
   ScrollView,
   FlatList,
   Text,
-  TouchableOpacity,
-  Switch,
-  TextInput,
-  Button
+  Switch
 } from "react-native";
 
 import Footer from "../components/Footer";
 import { connect } from "react-redux";
 
 class HomeScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  componentDidUpdate(prevProps) {
-    // Typical usage (don't forget to compare props):
-  }
   renderItem = ({ item }) => {
     return (
       <View style={styles.listLine}>
@@ -49,7 +38,7 @@ class HomeScreen extends React.Component {
 
   handleSubmit(text) {
     this.props.dispatch({
-      type: "UPDATE_NAME",
+      type: "UPDATE_LIST",
       payload: { name: text, done: false }
     });
   }
@@ -63,8 +52,12 @@ class HomeScreen extends React.Component {
             renderItem={this.renderItem}
             ListHeaderComponent={this.displayHeader}
             ListFooterComponent={
-              <Footer handleSubmit={text => this.handleSubmit(text)} />
+              <Footer
+                list={this.props.list}
+                handleSubmit={text => this.handleSubmit(text)}
+              />
             }
+            keyExtractor={index => index.toString()}
           />
         </ScrollView>
       </View>

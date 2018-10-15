@@ -27,7 +27,9 @@ export default class Footer extends React.Component {
     this.props.handleSubmit(this.state.text);
     this.setState({ text: "", footer: false });
   };
+
   render() {
+    console.log(this.props);
     if (!this.state.footer) {
       return (
         <TouchableOpacity onPress={this.onPress}>
@@ -44,7 +46,19 @@ export default class Footer extends React.Component {
             onChangeText={text => this.setState({ text })}
             value={this.state.text}
           />
-          <Button title="Submit" onPress={this.handleSubmit} />
+          <Button
+            disabled={
+              this.props.list.find(obj => {
+                if (obj.name === this.state.text) {
+                  return true;
+                }
+              }) ||
+              !this.state.text ||
+              !this.state.text.trim()
+            }
+            title="Submit"
+            onPress={this.handleSubmit}
+          />
         </View>
       );
     }

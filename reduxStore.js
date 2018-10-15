@@ -9,11 +9,12 @@ const initialState = [
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "UPDATE_NAME":
+    case "UPDATE_LIST":
       return [
         ...state,
         { name: action.payload.name, done: action.payload.done }
       ];
+
     case "UPDATE_SWITCH":
       return state.map(obj => {
         if (obj.name === action.payload.name) {
