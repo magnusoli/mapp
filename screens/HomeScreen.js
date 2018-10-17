@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, ScrollView, FlatList, Text } from "react-native";
+import { StyleSheet, ScrollView, FlatList, Text, View } from "react-native";
 
 import Footer from "../components/Footer";
 import Item from "../components/Item";
@@ -35,34 +35,33 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View>
-        <ScrollView contentContainerStyle={styles.container}>
-          <FlatList
-            data={this.props.list}
-            renderItem={({ item }) => (
-              <Item
-                item={item}
-                handleSwitch={(text, bool) => this.handleSwitch(text, bool)}
-                handleDelete={(text, bool) => this.handleDelete(text, bool)}
-              />
-            )}
-            ListHeaderComponent={this.displayHeader}
-            ListFooterComponent={
-              <Footer
-                list={this.props.list}
-                handleSubmit={text => this.handleSubmit(text)}
-              />
-            }
-            keyExtractor={index => index.toString()}
-          />
-        </ScrollView>
-      </View>
+      <ScrollView style={styles.container}>
+        <FlatList
+          data={this.props.list}
+          renderItem={({ item }) => (
+            <Item
+              item={item}
+              handleSwitch={(text, bool) => this.handleSwitch(text, bool)}
+              handleDelete={(text, bool) => this.handleDelete(text, bool)}
+            />
+          )}
+          ListHeaderComponent={this.displayHeader}
+          ListFooterComponent={
+            <Footer
+              list={this.props.list}
+              handleSubmit={text => this.handleSubmit(text)}
+            />
+          }
+          keyExtractor={index => index.toString()}
+        />
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     backgroundColor: "#fff"
   },
 

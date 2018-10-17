@@ -45,6 +45,7 @@ export default class Footer extends React.Component {
             onChangeText={text => this.setState({ text })}
             value={this.state.text}
           />
+
           <Button
             disabled={
               !!this.props.list.find(obj => {
