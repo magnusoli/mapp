@@ -1,33 +1,12 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  ScrollView,
-  FlatList,
-  Text,
-  Switch
-} from "react-native";
+import { StyleSheet, View, ScrollView, FlatList, Text } from "react-native";
 
 import Footer from "../components/Footer";
+import Item from "../components/Item";
+
 import { connect } from "react-redux";
 
 class HomeScreen extends React.Component {
-  renderItem = ({ item }) => {
-    return (
-      <View style={styles.listLine}>
-        <Switch
-          value={item.done}
-          onValueChange={() =>
-            this.props.dispatch({
-              type: "UPDATE_SWITCH",
-              payload: { name: item.name, done: !item.done }
-            })
-          }
-        />
-        <Text>{item.name}</Text>
-      </View>
-    );
-  };
   displayHeader = () => {
     return (
       <View style={styles.listHeader}>
@@ -35,6 +14,18 @@ class HomeScreen extends React.Component {
       </View>
     );
   };
+  handleSwitch(text, bool) {
+    this.props.dispatch({
+      type: "UPDATE_SWITCH",
+      payload: { name: text, done: bool }
+    });
+  }
+  handleDelete(text, bool) {
+    this.props.dispatch({
+      type: "UPDATE_DELETE",
+      payload: { name: text, done: bool }
+    });
+  }
   handleSubmit(text) {
     this.props.dispatch({
       type: "UPDATE_LIST",
@@ -48,7 +39,13 @@ class HomeScreen extends React.Component {
         <ScrollView contentContainerStyle={styles.container}>
           <FlatList
             data={this.props.list}
-            renderItem={this.renderItem}
+            renderItem={({ item }) => (
+              <Item
+                item={item}
+                handleSwitch={(text, bool) => this.handleSwitch(text, bool)}
+                handleDelete={(text, bool) => this.handleDelete(text, bool)}
+              />
+            )}
             ListHeaderComponent={this.displayHeader}
             ListFooterComponent={
               <Footer
@@ -68,17 +65,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff"
   },
-  listLine: {
-    width: "100%",
-    flex: 1,
-    flexDirection: "row",
-    padding: 20,
-    borderWidth: 0.5,
-    borderColor: "#aaa"
-  },
+
   listHeader: {
     justifyContent: "center",
-    backgroundColor: "#ada",
+    backgroundColor: "#aae",
     width: "100%",
     flex: 1,
     flexDirection: "row",

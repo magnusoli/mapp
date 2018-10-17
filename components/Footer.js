@@ -12,7 +12,7 @@ export default class Footer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      footer: false,
+      textinp: false,
       text: ""
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -20,21 +20,20 @@ export default class Footer extends React.Component {
   }
 
   onPress = () => {
-    this.setState({ footer: true });
+    this.setState({ textinp: true });
   };
 
   handleSubmit = () => {
     this.props.handleSubmit(this.state.text);
-    this.setState({ text: "", footer: false });
+    this.setState({ text: "", textinp: false });
   };
 
   render() {
-    console.log(this.props);
-    if (!this.state.footer) {
+    if (!this.state.textinp) {
       return (
         <TouchableOpacity onPress={this.onPress}>
           <View style={styles.listFooter}>
-            <Text>Add Todo?</Text>
+            <Text>What Todo?</Text>
           </View>
         </TouchableOpacity>
       );
@@ -68,11 +67,11 @@ export default class Footer extends React.Component {
 const styles = StyleSheet.create({
   listFooter: {
     justifyContent: "center",
-    backgroundColor: "#daa",
+    backgroundColor: "#bbb",
     width: "100%",
     flex: 1,
     flexDirection: "row",
-    padding: 30
+    padding: 20
   },
   textInput: {
     height: 40,

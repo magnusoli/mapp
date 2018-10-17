@@ -1,45 +1,12 @@
 import React from "react";
-import { StyleSheet, View, Button, TextInput } from "react-native";
-import { connect } from "react-redux";
+import { Text, View } from "react-native";
 
-class SettingsScreen extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { text: "" };
-  }
-
+export default class SettingsScreen extends React.Component {
   render() {
     return (
-      <View style={styles.container}>
-        <TextInput
-          style={styles.textInput}
-          onChangeText={text => this.setState({ text })}
-          value={this.state.text}
-        />
-        <Button
-          title="Submit name"
-          onPress={() =>
-            this.props.dispatch({
-              type: "UPDATE_LIST",
-              payload: { name: this.state.text, done: false }
-            })
-          }
-        />
+      <View>
+        <Text>This is the Setting Screen</Text>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff"
-  },
-  textInput: {
-    height: 40,
-    borderColor: "gray",
-    borderWidth: 1
-  }
-});
-
-export default connect()(SettingsScreen);
